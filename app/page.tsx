@@ -2,6 +2,7 @@ import { redirect } from "next/navigation"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import LoginPage from "@/components/login-page"
+import { Suspense } from "react"
 
 export default async function Home() {
   try {
@@ -15,5 +16,8 @@ export default async function Home() {
     // Continue to show login page if there's an error
   }
 
-  return <LoginPage />
+  return  (
+          <Suspense fallback={<div>Loading...</div>}>
+          <LoginPage />
+          </Suspense>)
 }
